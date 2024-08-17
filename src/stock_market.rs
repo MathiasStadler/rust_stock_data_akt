@@ -55,7 +55,9 @@ pub struct StockData {
     low: Decimal,
     open: Decimal,
     close: Decimal,
+    #[allow(dead_code)]
     net_change: Option<Decimal>,
+    #[allow(dead_code)]
     net_change_percent: Option<Decimal>,
 }
 
@@ -82,6 +84,7 @@ impl StockData {
 #[derive(Debug)]
 pub struct StockInformation {
     company_name: String,
+    #[allow(dead_code)]
     symbol: String,
     stock_data_series: Vec<StockData>,
 }
@@ -115,6 +118,8 @@ impl StockInformation {
             } else {
                 let previous_day_close = &self.stock_data_series[index - 1].close;
                 let current_day_close = stock_data.close;
+
+                #[allow(dead_code)]
                 #[derive(Debug)]
                 pub struct StockInformation {
                     company_name: String,
