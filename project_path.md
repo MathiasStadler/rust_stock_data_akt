@@ -76,6 +76,12 @@ cargo add ta
 cargo build
 ```
 
+## add cargo watch
+
+```bash
+cargo install cargo-watch
+```
+
 ## add plotters necessary dependencies
 
 ```bash
@@ -94,3 +100,11 @@ mkdir stock_data
 # curl --output stock_trex_data.csv https://stooq.com/q/d/l/?s=TREX.US&i=d&d1=19900101&d2=20241231
 
 ```
+
+## start /w cargo watch
+
+```bash
+cargo watch
+
+```
+
