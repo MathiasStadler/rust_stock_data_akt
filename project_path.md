@@ -1,13 +1,13 @@
 # create date
 
-- date 
+- date
 
 ```bash
 date
 Sa 17. Aug 2024
 ```
 
-- rustc --version 
+- rustc --version
 
 ``` bash
 rustc --version
@@ -107,4 +107,3 @@ mkdir stock_data
 cargo watch
 
 ```
-
