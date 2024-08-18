@@ -1,3 +1,1 @@
-pub mod stock_test;
-
-pub mod stock_market_trex_test;
+pub mod stock_market_test_four;
