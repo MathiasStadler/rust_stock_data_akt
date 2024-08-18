@@ -1,6 +1,3 @@
-
-// add sma
-
 use std::{error::Error, fs};
 
 // use chrono::{prelude::*, Duration};
@@ -40,8 +37,6 @@ use plotters::prelude::LineSeries;
 use plotters::prelude::PathElement;
 use plotters::prelude::RGBColor;
 use plotters::prelude::SeriesLabelPosition;
-
-
 
 use plotters::drawing::IntoDrawingArea;
 
@@ -351,7 +346,7 @@ impl StockInformation {
                 }
 
                 if ma_len > 0 {
-                    let chosen_color = [BLUE, RED, ORANGE][idx];
+                    let chosen_color = [BLUE, PURPLE, ORANGE][idx];
 
                     let line_series_label = format!("SMA {}", &ma_day);
 
