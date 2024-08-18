@@ -7,7 +7,11 @@ use rust_decimal::Decimal;
 
 #[cfg(test)]
 // use stock_market::StockInformation;
-use crate::StockData::*;
+//use crate::StockData;
+use rust_stock_data_akt::stock_market::StockData;
+
+use rust_stock_data_akt::stock_market::StockInformation;
+
 // use stock_market::StockData;
 //use crate::StockData;
 
