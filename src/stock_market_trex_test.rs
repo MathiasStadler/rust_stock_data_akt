@@ -1,14 +1,6 @@
 
 use chrono::{DateTime, NaiveDateTime, TimeZone, Utc};
 
-// use rand::Rng;
-// use rust_decimal::Decimal;
-// use rust_decimal::{
-//     prelude::{FromPrimitive, ToPrimitive},
-//     Decimal,
-// };
-// use rust_decimal_macros::dec;
-
 use crate::stock_market::StockData;
 
 use rand::Rng;
@@ -18,7 +10,6 @@ use rust_decimal_macros::dec;
 
 
 #[cfg(test)]
-// use super::*;
 use crate::stock_market::StockInformation;
 
 fn generate_utc_date_from_date_string(date_string: &str) -> DateTime<Utc> {
