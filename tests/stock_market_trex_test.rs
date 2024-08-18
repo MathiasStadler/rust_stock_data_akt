@@ -1,14 +1,15 @@
 use chrono::{DateTime, NaiveDateTime, TimeZone, Utc};
 
-use crate::stock_market::StockData;
-
 use rand::Rng;
 use rust_decimal::prelude::FromPrimitive;
 use rust_decimal::Decimal;
 // use rust_decimal_macros::dec;
 
 #[cfg(test)]
-use crate::stock_market::StockInformation;
+// use stock_market::StockInformation;
+use crate::StockData::*;
+// use stock_market::StockData;
+//use crate::StockData;
 
 fn generate_utc_date_from_date_string(date_string: &str) -> DateTime<Utc> {
     let day_one = NaiveDateTime::parse_from_str(date_string, "%m-%d-%Y %H:%M").unwrap();
@@ -111,7 +112,5 @@ fn it_creates_a_new_stock_information_with_data_series_and_show_chart_with_movin
         Err(err) => println!("Error in saving chart {:?}", err),
     }
 }
-
-
 
 //cargo test stock_market_trex_test
