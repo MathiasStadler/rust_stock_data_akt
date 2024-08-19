@@ -5,12 +5,41 @@ mod tests {
     use rand::Rng;
     use rust_decimal::prelude::FromPrimitive;
     use rust_decimal::Decimal;
-    
+
+    // ta
+    use ta::indicators::SimpleMovingAverage as Sma;
+    use ta::DataItem;
+    use ta::Next;
+
+    // for csv read from file
+    use serde::Deserialize;
 
     #[cfg(test)]
     use rust_stock_data_akt::stock_market::StockData;
     use rust_stock_data_akt::stock_market::StockInformation;
- 
+
+    const CSV_STOCK_INPUT: &str = "stock_data/stock_trex_data.csv";
+
+    #[derive(Debug, Deserialize)]
+    struct Record {
+        #[serde(rename = "Date")]
+        date: String,
+
+        #[serde(rename = "Open")]
+        open: f32,
+
+        #[serde(rename = "High")]
+        high: f32,
+
+        #[serde(rename = "Low")]
+        low: f32,
+
+        #[serde(rename = "Close")]
+        close: f32,
+
+        #[serde(rename = "Volume")]
+        volume: f32,
+    }
 
     fn generate_utc_date_from_date_string(date_string: &str) -> DateTime<Utc> {
         let day_one = NaiveDateTime::parse_from_str(date_string, "%m-%d-%Y %H:%M").unwrap();
@@ -19,9 +48,33 @@ mod tests {
 
     #[allow(dead_code)]
     fn generate_stock_data_from_csv(date_string: &str) -> StockData {
+        let mut sma = Sma::new(7).unwrap();
+        let mut reader = csv::Reader::from_path(CSV_STOCK_INPUT).unwrap();
+
+        for record in reader.deserialize() {
+            let (date, open, high, low, close, volume): (String, f64, f64, f64, f64, f64) =
+                record.unwrap();
+
+            let dt = DataItem::builder()
+                .open(open)
+                .high(high)
+                .low(low)
+                .close(close)
+                .volume(volume)
+                .build()
+                .unwrap();
+
+            let sma_val = sma.next(&dt);
+            // println!("{}: {} = {:2.2}", date, sma, sma_val);
+            println!(
+                " {:?}, {:?}, {:?}, {:?},{:?}, {:?}, {:2.2}",
+                date, open, high, low, close, volume, sma_val
+            );
+            // println!("{}: {} = {:2.2}", date, sma, sma_val);
+        }
 
         // let base_stock_data_series: Vec<_> = vec![];
-        let base_stock_data_series: Vec <(f64,f64,f64,f64)> = vec![] ;
+        let base_stock_data_series: Vec<(f64, f64, f64, f64)> = vec![];
         let base_data_series_len = base_stock_data_series.len();
 
         let mut rng = rand::thread_rng();
@@ -50,7 +103,15 @@ mod tests {
             open,
             close,
         )
+    }
 
+    #[test]
+    fn test_generate_stock_data_from_csv() {
+
+        let stock_date:&str = "" ;
+
+        generate_stock_data_from_csv(&stock_date);
+        
     }
 
     fn generate_stock_data(date_string: &str) -> StockData {
