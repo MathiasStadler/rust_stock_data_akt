@@ -48,8 +48,16 @@ mod tests {
 
     #[allow(dead_code)]
     fn generate_stock_data_from_csv(date_string: &str) -> StockData {
+        
         let mut sma = Sma::new(7).unwrap();
         let mut reader = csv::Reader::from_path(CSV_STOCK_INPUT).unwrap();
+
+        let mut vec_stock_data:Vec<(String, f64, f64, f64, f64, f64)> = Vec::new(); // ("String",1,2,3,4,5);
+        println!("{}",vec_stock_data.len());
+
+
+
+        // base_stock_data_series.push();
 
         for record in reader.deserialize() {
             let (_date, open, high, low, close, volume): (String, f64, f64, f64, f64, f64) =
@@ -64,18 +72,25 @@ mod tests {
                 .build()
                 .unwrap();
 
+               // vec_stock_data.push([_date,open,high,low,close,volume]);
+
+               // println!("{}",  vec_stock_data.len());
+
             let _sma_val = sma.next(&dt);
             // println!("{}: {} = {:2.2}", date, sma, sma_val);
+            
+            //
             // println!(
             //     " {:?}, {:?}, {:?}, {:?},{:?}, {:?}, {:2.2}",
-            //     date, open, high, low, close, volume, sma_val
+            //     _date, open, high, low, close, volume, _sma_val
             // );
+            //
             // println!("{}: {} = {:2.2}", date, sma, sma_val);
         }
 
         // let base_stock_data_series: Vec<_> = vec![];
-        let base_stock_data_series: Vec<(f64, f64, f64, f64)> = vec![];
-        let base_data_series_len = base_stock_data_series.len();
+        // let base_stock_data_series: Vec<(f64, f64, f64, f64)> = vec![];
+        // let base_data_series_len = base_stock_data_series.len();
 
         let mut rng = rand::thread_rng();
 
@@ -103,6 +118,8 @@ mod tests {
             open,
             close,
         )
+
+        // 
     }
 
     #[test]
@@ -115,6 +132,9 @@ mod tests {
         assert!(true);
         
     }
+
+    // cargo test--package rust_stock_data_akt --bin rust_stock_data_akt -- tests::stock_market_test_seven::tests::test_generate_stock_data_from_csv
+    // --exact --show-output
 
     fn generate_stock_data(date_string: &str) -> StockData {
         let base_stock_data_series = vec![
