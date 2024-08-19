@@ -17,6 +17,42 @@ mod tests {
         Utc.from_utc_datetime(&day_one)
     }
 
+    #[allow(dead_code)]
+    fn generate_stock_data_from_csv(date_string: &str) -> StockData {
+
+        // let base_stock_data_series: Vec<_> = vec![];
+        let base_stock_data_series: Vec <(f64,f64,f64,f64)> = vec![] ;
+        let base_data_series_len = base_stock_data_series.len();
+
+        let mut rng = rand::thread_rng();
+
+        let high =
+            Decimal::from_f64(base_stock_data_series[rng.gen_range(0..base_data_series_len)].1)
+                .unwrap()
+                .round_dp(2);
+        let low =
+            Decimal::from_f64(base_stock_data_series[rng.gen_range(0..base_data_series_len)].2)
+                .unwrap()
+                .round_dp(2);
+        let open =
+            Decimal::from_f64(base_stock_data_series[rng.gen_range(0..base_data_series_len)].0)
+                .unwrap()
+                .round_dp(2);
+        let close =
+            Decimal::from_f64(base_stock_data_series[rng.gen_range(0..base_data_series_len)].3)
+                .unwrap()
+                .round_dp(2);
+
+        StockData::new(
+            generate_utc_date_from_date_string(date_string),
+            high,
+            low,
+            open,
+            close,
+        )
+
+    }
+
     fn generate_stock_data(date_string: &str) -> StockData {
         let base_stock_data_series = vec![
             (130.0600, 131.3700, 128.8300, 129.1500),
